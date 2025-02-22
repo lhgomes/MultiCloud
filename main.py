@@ -1,7 +1,7 @@
 # main.py
 import os
 import json
-from common_layer.business_logic import Calculator
+from business_logic import Calculator
 from common_layer.normalize_handler import normalize_handler
 
 def get_datastore():
