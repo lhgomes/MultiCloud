@@ -1,0 +1,79 @@
+name: Deploy Application
+
+on:
+  push:
+    branches:
+      - main  # Change to your protected branch
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install Common Dependencies
+        run: pip install -r common/requirements.txt
+
+      # Run your tests here if you have any.
+      - name: Run Tests
+        run: pytest
+
+  deploy-aws:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    environment:
+      name: aws-prod
+      # The environment protection rules for "aws-prod" (set in your repo settings)
+      # will require manual approval before this job runs.
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Package for AWS
+        run: make package-aws
+
+      - name: Deploy to AWS Lambda
+        run: |
+          aws lambda update-function-code \
+            --function-name ${{ secrets.AWS_LAMBDA_FUNCTION_NAME }} \
+            --zip-file fileb://deployment_aws.zip
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+
+  deploy-azure:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    environment:
+      name: azure-prod
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Package for Azure
+        run: make package-azure
+
+      - name: Deploy to Azure Functions
+        uses: Azure/functions-action@v1
+        with:
+          app-name: ${{ secrets.AZURE_FUNCTION_APP_NAME }}
+          package: deployment_azure.zip
+        env:
+          AZURE_WEBAPP_PUBLISH_PROFILE: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
