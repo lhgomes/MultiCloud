@@ -5,6 +5,7 @@ package-aws:
 	@rm -rf $(PACKAGE_DIR)
 	@mkdir -p $(PACKAGE_DIR)
 	@cp main.py $(PACKAGE_DIR)
+	@cp business_logic.py $(PACKAGE_DIR)
 	@mkdir -p $(PACKAGE_DIR)/common_layer
 	@cp common_layer/*.py $(PACKAGE_DIR)/common_layer
 	@mkdir -p $(PACKAGE_DIR)/aws_layer
@@ -18,6 +19,7 @@ package-azure:
 	@rm -rf $(PACKAGE_DIR)
 	@mkdir -p $(PACKAGE_DIR)
 	@cp main.py $(PACKAGE_DIR)
+	@cp business_logic.py $(PACKAGE_DIR)
 	@mkdir -p $(PACKAGE_DIR)/common_layer
 	@cp common_layer/*.py $(PACKAGE_DIR)/common_layer
 	@mkdir -p $(PACKAGE_DIR)/azure_layer
