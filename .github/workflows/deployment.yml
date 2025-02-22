@@ -18,7 +18,7 @@ jobs:
           python-version: '3.8'
 
       - name: Install Common Dependencies
-        run: pip install -r common/requirements.txt
+        run: pip install -r common_layer/requirements.txt
 
       # Run your tests here if you have any.
       - name: Run Tests
