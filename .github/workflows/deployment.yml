@@ -38,7 +38,7 @@ jobs:
           python-version: '3.8'
 
       - name: Package for AWS
-        run: make package-azure name=azure-prod
+        run: make package-aws
 
       - name: Deploy to AWS Lambda
         run: |
@@ -65,7 +65,7 @@ jobs:
           python-version: '3.8'
 
       - name: Package for Azure
-        run: make package-azure
+        run: make package-azure name=azure-prod
 
       - name: Azure Login
         uses: azure/login@v1
