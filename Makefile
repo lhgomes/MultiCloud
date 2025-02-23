@@ -28,11 +28,9 @@ package-azure:
 	@cp azure_config/__init__.py $(PACKAGE_DIR)/$(FUNCTION_DIR)
 	@cp azure_config/function.json $(PACKAGE_DIR)/$(FUNCTION_DIR)
 
-	@mkdir -p $(PACKAGE_DIR)/$(FUNCTION_DIR)/common_layer
-	@cp common_layer/*.py $(PACKAGE_DIR)/$(FUNCTION_DIR)/common_layer
+	@cp common_layer/*.py $(PACKAGE_DIR)/$(FUNCTION_DIR)
 
-	@mkdir -p $(PACKAGE_DIR)/$(FUNCTION_DIR)/azure_layer
-	@cp azure_layer/azure_impl.py $(PACKAGE_DIR)/$(FUNCTION_DIR)/azure_layer
+	@cp azure_layer/azure_impl.py $(PACKAGE_DIR)/$(FUNCTION_DIR)
 
 	@cd $(PACKAGE_DIR) && zip -r ../deployment_azure.zip .
 	@echo "Azure package created: deployment_azure.zip"

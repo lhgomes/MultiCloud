@@ -2,7 +2,7 @@
 import os
 import json
 from business_logic import Calculator
-from common_layer.normalize_handler import normalize_handler
+from normalize_handler import normalize_handler
 
 def get_datastore():
     """

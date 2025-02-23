@@ -1,7 +1,7 @@
 # azure_impl.py
 import uuid
 from azure.cosmos import CosmosClient
-from common_layer.interfaces import DataStore
+from interfaces import DataStore
 
 class CosmosDBStore(DataStore):
     def __init__(self, endpoint: str, key: str, database_name: str, container_name: str):

@@ -1,6 +1,7 @@
 {
     "python.analysis.extraPaths": [
         "/mnt/c/Users/lhgom/Source/repos/phhelper",
-        "/mnt/c/Users/lhgom/OneDrive/Documents/AWS/Layers/pymongo_layer"
+        "/mnt/c/Users/lhgom/OneDrive/Documents/AWS/Layers/pymongo_layer",
+        "./common_layer"
     ]
 }
