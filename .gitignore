@@ -2,3 +2,4 @@
 *.zip
 package
 local.settings.json
+.vscode
