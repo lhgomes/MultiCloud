@@ -8,5 +8,5 @@ class Calculator:
     def process_values(self, value1: int, value2: int) -> int:
         # Save the values to the datastore
         self.datastore.save_values(value1, value2)
-        # Return the sum of the two values
-        return value1 + value2
+        # Return the plus of the two values
+        return value1 * value2
