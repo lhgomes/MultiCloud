@@ -70,10 +70,13 @@ jobs:
       - name: Package for Azure
         run: make package-azure
 
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: Deploy to Azure Functions
         uses: Azure/functions-action@v1
         with:
           app-name: ${{ secrets.AZURE_FUNCTION_APP_NAME }}
           package: deployment_azure.zip
-        env:
-          AZURE_WEBAPP_PUBLISH_PROFILE: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}

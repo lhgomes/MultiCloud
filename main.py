@@ -18,8 +18,8 @@ def get_datastore():
         return CosmosDBStore(
             endpoint=os.getenv("COSMOSDB_ENDPOINT", ""),
             key=os.getenv("COSMOSDB_KEY", ""),
-            database_name=os.getenv("COSMOSDB_DATABASE", "default_db"),
-            container_name=os.getenv("COSMOSDB_CONTAINER", "default_container")
+            database_name=os.getenv("COSMOSDB_DATABASE", ""),
+            container_name=os.getenv("COSMOSDB_CONTAINER", "")
         )
     else:
         raise ValueError(f"Unsupported cloud provider: {provider}")
