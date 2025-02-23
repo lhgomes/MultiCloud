@@ -20,6 +20,7 @@ package-azure:
 	@rm -rf $(PACKAGE_DIR)
 	@mkdir -p $(PACKAGE_DIR)
 	@cp azure_config/host.json $(PACKAGE_DIR)
+	@cp azure_config/local.settings.json $(PACKAGE_DIR)
 	@cp azure_layer/requirements_azure.txt $(PACKAGE_DIR)/requirements.txt
 
 	@mkdir -p $(PACKAGE_DIR)/$(FUNCTION_DIR)
