@@ -20,7 +20,6 @@ package-azure:
 	@rm -rf $(PACKAGE_DIR)
 	@mkdir -p $(PACKAGE_DIR)
 	@cp azure_config/host.json $(PACKAGE_DIR)
-	@cp azure_config/local.settings.json $(PACKAGE_DIR)
 	@cp azure_layer/requirements_azure.txt $(PACKAGE_DIR)/requirements.txt
 
 	@mkdir -p $(PACKAGE_DIR)/$(FUNCTION_DIR)
@@ -36,5 +35,10 @@ package-azure:
 	@cp azure_config/__init__.py $(PACKAGE_DIR)/$(FUNCTION_DIR)
 	@cp azure_config/function.json $(PACKAGE_DIR)/$(FUNCTION_DIR)
 
+ifeq ($(name),azure-prod)
 	@cd $(PACKAGE_DIR) && zip -r ../deployment_azure.zip .
 	@echo "Azure package created: deployment_azure.zip"
+else
+	@echo "Copying local.settings.json for non-prod deployment"
+	@cp azure_config/local.settings.json $(PACKAGE_DIR)
+endif
