@@ -3,7 +3,7 @@ name: Deploy Application
 on:
   push:
     branches:
-      - main  # Change to your protected branch
+      - main 
 
 jobs:
   build-and-test:
@@ -20,7 +20,6 @@ jobs:
       - name: Install Common Dependencies
         run: pip install -r common_layer/requirements.txt
 
-      # Run your tests here if you have any.
       - name: Run Tests
         run: pytest
 
@@ -29,8 +28,6 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: aws-prod
-      # The environment protection rules for "aws-prod" (set in your repo settings)
-      # will require manual approval before this job runs.
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -41,7 +38,7 @@ jobs:
           python-version: '3.8'
 
       - name: Package for AWS
-        run: make package-aws
+        run: make package-azure name=azure-prod
 
       - name: Deploy to AWS Lambda
         run: |
