@@ -8,12 +8,15 @@ package-aws:
 	@cp main.py $(PACKAGE_DIR)
 	@cp business_logic.py $(PACKAGE_DIR)
 	@cp aws_config/__init__.py $(PACKAGE_DIR)
+	
 	@mkdir -p $(PACKAGE_DIR)/common_layer
 	@cp common_layer/*.py $(PACKAGE_DIR)/common_layer
+
 	@mkdir -p $(PACKAGE_DIR)/aws_layer
-	@cp aws_layer/aws_impl.py $(PACKAGE_DIR)/aws_layer/aws_impl.py
+	@cp aws_layer/*.py $(PACKAGE_DIR)/aws_layer
 	@cp aws_layer/requirements_aws.txt $(PACKAGE_DIR)/requirements.txt
-	@cd $(PACKAGE_DIR) && zip -r ../deployment_aws.zip .
+	
+	@zip -r deployment_aws.zip $(PACKAGE_DIR)
 	@echo "AWS package created: deployment_aws.zip"
 
 package-azure:
