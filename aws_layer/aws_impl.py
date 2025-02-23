@@ -1,7 +1,7 @@
 # aws_impl.py
 import boto3
 import uuid
-from interfaces import DataStore
+from ..common_layer.interfaces import DataStore
 
 class DynamoDBStore(DataStore):
     def __init__(self, table_name: str):
