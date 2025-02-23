@@ -78,5 +78,5 @@ jobs:
       - name: Deploy to Azure Functions
         uses: Azure/functions-action@v1
         with:
-          app-name: ${{ secrets.AZURE_FUNCTION_APP_NAME }}
+          app-name: ${{ vars.AZURE_FUNCTION_APP_NAME }}
           package: deployment_azure.zip
