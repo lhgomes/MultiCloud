@@ -9,7 +9,7 @@ def get_datastore(running_environment):
     Dynamically import and return the appropriate DataStore implementation based on environment.
     """
     if running_environment == "aws":
-        from aws_layer.aws_impl import DynamoDBStore
+        from .aws_layer.aws_impl import DynamoDBStore
         table_name = os.getenv("DYNAMODB_TABLE", "default_table")
         return DynamoDBStore(table_name=table_name)
     elif running_environment == "azure":
