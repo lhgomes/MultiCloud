@@ -2,19 +2,18 @@
 import os
 import json
 from .business_logic import Calculator
-from .normalize_handler import normalize_handler
+from .common_layer.normalize_handler import normalize_handler
 
-def get_datastore():
+def get_datastore(running_environment):
     """
     Dynamically import and return the appropriate DataStore implementation based on environment.
     """
-    provider = os.getenv("CLOUD_PROVIDER", "aws").lower()
-    if provider == "aws":
+    if running_environment == "aws":
         from aws_layer.aws_impl import DynamoDBStore
         table_name = os.getenv("DYNAMODB_TABLE", "default_table")
         return DynamoDBStore(table_name=table_name)
-    elif provider == "azure":
-        from azure_layer.azure_impl import CosmosDBStore
+    elif running_environment == "azure":
+        from .azure_layer.azure_impl import CosmosDBStore
         return CosmosDBStore(
             endpoint=os.getenv("COSMOSDB_ENDPOINT", ""),
             key=os.getenv("COSMOSDB_KEY", ""),
@@ -22,10 +21,10 @@ def get_datastore():
             container_name=os.getenv("COSMOSDB_CONTAINER", "")
         )
     else:
-        raise ValueError(f"Unsupported cloud provider: {provider}")
+        raise ValueError(f"Unsupported environment: {running_environment}")
 
 @normalize_handler
-def unified_handler(normalized_event):
+def unified_handler(normalized_event, running_environment):
     """
     A unified handler that expects a merged dictionary of parameters.
     
@@ -38,7 +37,7 @@ def unified_handler(normalized_event):
     except (TypeError, ValueError):
         return json.dumps({"error": "Invalid input. 'value1' and 'value2' must be numbers."})
     
-    datastore = get_datastore()
+    datastore = get_datastore(running_environment)
     calc = Calculator(datastore)
     result = calc.process_values(value1, value2)
     return json.dumps({"result": result})

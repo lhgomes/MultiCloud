@@ -25,8 +25,13 @@ package-azure:
 	@mkdir -p $(PACKAGE_DIR)/$(FUNCTION_DIR)
 	@cp main.py $(PACKAGE_DIR)/$(FUNCTION_DIR)
 	@cp business_logic.py $(PACKAGE_DIR)/$(FUNCTION_DIR)
-	@cp common_layer/*.py $(PACKAGE_DIR)/$(FUNCTION_DIR)
-	@cp azure_layer/azure_impl.py $(PACKAGE_DIR)/$(FUNCTION_DIR)
+	
+	@mkdir -p $(PACKAGE_DIR)/$(FUNCTION_DIR)/azure_layer
+	@cp azure_layer/*.py $(PACKAGE_DIR)/$(FUNCTION_DIR)/azure_layer
+
+	@mkdir -p $(PACKAGE_DIR)/$(FUNCTION_DIR)/common_layer
+	@cp common_layer/*.py $(PACKAGE_DIR)/$(FUNCTION_DIR)/common_layer
+	
 	@cp azure_config/__init__.py $(PACKAGE_DIR)/$(FUNCTION_DIR)
 	@cp azure_config/function.json $(PACKAGE_DIR)/$(FUNCTION_DIR)
 

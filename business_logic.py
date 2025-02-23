@@ -1,5 +1,5 @@
 # business_logic.py
-from .interfaces import DataStore
+from .common_layer.interfaces import DataStore
 
 class Calculator:
     def __init__(self, datastore: DataStore):

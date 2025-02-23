@@ -27,7 +27,7 @@ def normalize_handler(func):
                     body = {}
             # Merge body and query string parameters.
             normalized_event = {**body, **query_params}
-            response = func(normalized_event)
+            response = func(normalized_event, 'aws')
             return {
                 "statusCode": 200,
                 "body": response
@@ -42,7 +42,7 @@ def normalize_handler(func):
             except Exception:
                 body = {}
             normalized_event = {**body, **query_params}
-            response = func(normalized_event)
+            response = func(normalized_event, 'azure')
             # Import here to avoid dependency issues on non-Azure environments.
             import azure.functions as func_azure
             return func_azure.HttpResponse(response, status_code=200, mimetype="application/json")
