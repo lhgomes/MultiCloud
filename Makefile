@@ -25,12 +25,10 @@ package-azure:
 	@mkdir -p $(PACKAGE_DIR)/$(FUNCTION_DIR)
 	@cp main.py $(PACKAGE_DIR)/$(FUNCTION_DIR)
 	@cp business_logic.py $(PACKAGE_DIR)/$(FUNCTION_DIR)
+	@cp common_layer/*.py $(PACKAGE_DIR)/$(FUNCTION_DIR)
+	@cp azure_layer/azure_impl.py $(PACKAGE_DIR)/$(FUNCTION_DIR)
 	@cp azure_config/__init__.py $(PACKAGE_DIR)/$(FUNCTION_DIR)
 	@cp azure_config/function.json $(PACKAGE_DIR)/$(FUNCTION_DIR)
-
-	@cp common_layer/*.py $(PACKAGE_DIR)/$(FUNCTION_DIR)
-
-	@cp azure_layer/azure_impl.py $(PACKAGE_DIR)/$(FUNCTION_DIR)
 
 	@cd $(PACKAGE_DIR) && zip -r ../deployment_azure.zip .
 	@echo "Azure package created: deployment_azure.zip"
