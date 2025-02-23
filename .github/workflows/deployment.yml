@@ -77,4 +77,3 @@ jobs:
         with:
           app-name: ${{ vars.AZURE_FUNCTION_APP_NAME }}
           package: deployment_azure.zip
-          scm-do-build-during-deployment: true

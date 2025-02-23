@@ -36,6 +36,7 @@ package-azure:
 	@cp azure_config/function.json $(PACKAGE_DIR)/$(FUNCTION_DIR)
 
 ifeq ($(name),azure-prod)
+	@cd $(PACKAGE_DIR) && pip install -r requirements.txt --target .python_packages
 	@cd $(PACKAGE_DIR) && zip -r ../deployment_azure.zip .
 	@echo "Azure package created: deployment_azure.zip"
 else
